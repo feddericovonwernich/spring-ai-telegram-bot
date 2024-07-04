@@ -1,0 +1,8 @@
+assistant:
+    enabled: true
+    openia:
+        apikey: dummykey
+
+telegram:
+    bot:
+        enabled: true

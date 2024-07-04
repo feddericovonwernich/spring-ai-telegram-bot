@@ -1,0 +1,55 @@
+plugins {
+	//id 'java'
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'io.github.feddericovonwernich'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation project(":spring-ai-telegram-bot")
+
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.11.0'
+
+	// https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter
+	testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.19.0'
+
+	// https://mvnrepository.com/artifact/org.testcontainers/testcontainers
+	testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.19.0'
+
+	// https://mvnrepository.com/artifact/org.testcontainers/mysql
+	testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.19.0'
+
+	// Runtime dependencies.
+
+	runtimeOnly 'com.mysql:mysql-connector-j:8.0.32'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

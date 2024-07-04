@@ -1,0 +1,125 @@
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+	id 'org.jreleaser' version '1.13.1'
+}
+
+group = 'io.github.feddericovonwernich'
+version = '0.0.1'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+// TODO Use spring dependency management plugin
+
+dependencies {
+
+	api 'io.github.feddericovonwernich:spring-ai-function-calling-service:0.0.1'
+
+	api 'org.telegram:telegrambots-longpolling:7.2.1'
+
+	api 'org.telegram:telegrambots-client:7.2.1'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.3.1'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+	implementation group: 'org.springframework.boot', name: 'spring-boot', version: '3.3.1'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure
+	implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '3.3.1'
+
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.13'
+
+	// https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
+	implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '3.0.0'
+
+	// https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api
+	implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.2.0'
+
+	compileOnly 'org.projectlombok:lombok:1.18.34'
+	annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.34'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes(
+				'Implementation-Title': 'Spring AI Telegram Bot',
+				'Implementation-Version': version
+		)
+	}
+}
+
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId = 'io.github.feddericovonwernich'
+			artifactId = 'spring-ai-telegram-bot'
+
+			from components.java
+
+			pom {
+				name = 'Spring AI Telegram Bot'
+				description = 'A Telegram Bot to interact with spring-ai-function-calling-service Assistant'
+				url = 'https://github.com/feddericovonwernich/spring-ai-telegram-bot'
+				inceptionYear = '2024'
+				licenses {
+					license {
+						name = 'Apache-2.0'
+						url = 'https://spdx.org/licenses/Apache-2.0.html'
+					}
+				}
+				developers {
+					developer {
+						id = 'Federico von Wernich'
+						name = 'Federico von Wernich'
+					}
+				}
+				scm {
+					connection = 'scm:git:https://github.com/feddericovonwernich/spring-ai-telegram-bot.git'
+					developerConnection = 'scm:git:ssh://github.com/feddericovonwernich/spring-ai-telegram-bot.git'
+					url = 'http://github.com/feddericovonwernich/spring-ai-telegram-bot'
+				}
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			url = layout.buildDirectory.dir('staging-deploy')
+		}
+	}
+}
+
+// Define the default value for jreleaserConfigFile
+def defaultJreleaserConfigFile = 'jreleaserPreReleaseToGithub.yml'
+
+// Use the value from gradle.properties or fall back to the default
+def jreleaserConfigFile = project.findProperty('jreleaserConfigFile') ?: defaultJreleaserConfigFile
+
+
+jreleaser {
+	configFile(projectDir.getAbsolutePath() + "/" + jreleaserConfigFile)
+	setGitRootSearch(true)
+}
