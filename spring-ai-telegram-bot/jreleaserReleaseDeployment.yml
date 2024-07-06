@@ -1,8 +1,8 @@
 project:
-  name: spring-ai-function-calling-service
-  description: Function calling implemented with annotations.
+  name: spring-ai-telegram-bot
+  description: A Telegram Bot to interact with spring-ai-function-calling-service Assistant
   links:
-    homepage: https://github.com/feddericovonwernich/spring-ai-function-calling-service
+    homepage: https://github.com/feddericovonwernich/spring-ai-telegram-bot
   copyright: 'Copyright © 2024 Federico von Wernich'
   license: Apache-2.0
   authors:
@@ -27,4 +27,4 @@ signing:
 files:
   active: ALWAYS
   artifacts:
-    - path: build/libs/spring-ai-function-calling-service-{{projectVersion}}.jar
+    - path: build/libs/spring-ai-telegram-bot-{{projectVersion}}.jar
