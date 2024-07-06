@@ -1,4 +1,4 @@
-package io.github.feddericovonwernich.spring_ai.telegram_bot;
+package io.github.feddericovonwernich.spring_ai.telegram_bot_test;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;

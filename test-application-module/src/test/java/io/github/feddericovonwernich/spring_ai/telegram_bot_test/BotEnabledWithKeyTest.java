@@ -1,11 +1,10 @@
-package io.github.feddericovonwernich.spring_ai.telegram_bot;
+package io.github.feddericovonwernich.spring_ai.telegram_bot_test;
 
-import io.github.feddericovonwernich.spring_ai.telegram_bot.commands.BotCommand;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.controllers.TelegramBotController;
+import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
@@ -19,6 +18,9 @@ class BotEnabledWithKeyTest extends BasicApplicationIntegrationTest {
     @Autowired
     private TelegramBotController telegramBotController;
 
+    @Autowired
+    private AssistantThreadService assistantThreadService;
+
     @Test
     void contextLoads() {
     }
@@ -26,6 +28,11 @@ class BotEnabledWithKeyTest extends BasicApplicationIntegrationTest {
     @Test
     void testBotServiceBeanExists() {
         assertThat(telegramBotController).isNotNull();
+    }
+
+    @Test
+    void testAssistantThreadServiceExists() {
+        assertThat(assistantThreadService).isNotNull();
     }
 
     @Test

@@ -1,6 +1,5 @@
-package io.github.feddericovonwernich.spring_ai.telegram_bot;
+package io.github.feddericovonwernich.spring_ai.telegram_bot_test;
 
-import io.github.feddericovonwernich.spring_ai.function_calling_service.openia.StandardOpenIAAssistantService;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.controllers.TelegramBotController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

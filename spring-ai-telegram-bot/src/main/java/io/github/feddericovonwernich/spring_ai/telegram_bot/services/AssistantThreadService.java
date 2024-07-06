@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Component
 public class AssistantThreadService extends BasicService<AssistantThread, Long, AssistantThreadRepository> {
+
     public AssistantThreadService(AssistantThreadRepository repository) {
         super(repository);
     }
