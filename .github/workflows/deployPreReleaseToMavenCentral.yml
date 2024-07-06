@@ -30,5 +30,4 @@ jobs:
           JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
           JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }}
           JRELEASER_NEXUS2_PASSWORD: ${{ secrets.JRELEASER_NEXUS2_PASSWORD }}
-          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew spring-ai-telegram-bot:jreleaserChecksum spring-ai-telegram-bot:jreleaserSign  spring-ai-telegram-bot:jreleaserDeploy -PjreleaserConfigFile=jreleaserPreReleaseDeployment.yml
