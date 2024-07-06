@@ -1,0 +1,2 @@
+io.github.feddericovonwernich.spring_ai.telegram_bot.configuration.TelegramBotConfiguration
+io.github.feddericovonwernich.spring_ai.telegram_bot.commands.CommandConfiguration
