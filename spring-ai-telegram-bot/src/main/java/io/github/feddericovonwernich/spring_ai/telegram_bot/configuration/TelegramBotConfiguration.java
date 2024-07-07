@@ -6,6 +6,8 @@ import io.github.feddericovonwernich.spring_ai.telegram_bot.conditions.BotKeyPre
 import io.github.feddericovonwernich.spring_ai.telegram_bot.controllers.TelegramBotController;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.repositories.AssistantThreadRepository;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -22,6 +24,8 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 })
 @Conditional({BotEnabledCondition.class, BotKeyPresentCondition.class})
 public class TelegramBotConfiguration {
+
+    Logger log = LoggerFactory.getLogger(TelegramBotConfiguration.class);
 
     @Value("${telegram.bot.key}")
     private String botKey;
@@ -45,11 +49,9 @@ public class TelegramBotConfiguration {
                 = new TelegramBotController(applicationContext, telegramClient, assistantService, assistantThreadService);
 
         if (registerBot) {
-            try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
-                botsApplication.registerBot(botKey, telegramBotController);
-            } catch (Exception e) {
-                throw new TelegramApiException("Failed to register bot", e);
-            }
+            TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication();
+            botsApplication.registerBot(botKey, telegramBotController);
+            log.info("Successfully registered bot.");
         }
 
         return telegramBotController;
