@@ -21,7 +21,7 @@ dependencies {
 
 	api 'io.github.feddericovonwernich:spring-ai-function-calling-service:0.0.1'
 
-	api 'org.telegram:telegrambots-longpolling:7.2.1'
+	api 'org.telegram:telegrambots-longpolling:7.6.1'
 
 	api 'org.telegram:telegrambots-client:7.2.1'
 
