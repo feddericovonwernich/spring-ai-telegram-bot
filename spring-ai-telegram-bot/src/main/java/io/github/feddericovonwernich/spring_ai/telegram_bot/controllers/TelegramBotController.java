@@ -5,6 +5,7 @@ import io.github.feddericovonwernich.spring_ai.function_calling_service.spi.Assi
 import io.github.feddericovonwernich.spring_ai.telegram_bot.commands.BotCommand;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.models.AssistantThread;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
+import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -42,7 +43,9 @@ public class TelegramBotController implements LongPollingSingleThreadUpdateConsu
 
     private Map<String, BotCommand> resolveCommands() {
         Map<String, BotCommand> commands = applicationContext.getBeansOfType(BotCommand.class);
-        return commands.values().stream().collect(Collectors.toMap(BotCommand::getCommand, Function.identity()));
+        Map<String, BotCommand> registeredCommands = commands.values().stream().collect(Collectors.toMap(BotCommand::getCommand, Function.identity()));
+        registeredCommands.forEach((command, botCommand) -> log.info("Registered Command: " + command + ", Class: " + botCommand.getClass().getSimpleName()));
+        return registeredCommands;
     }
 
     public Map<String, BotCommand> getBotCommandMap() {

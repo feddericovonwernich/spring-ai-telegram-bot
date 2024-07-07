@@ -1,7 +1,7 @@
 package io.github.feddericovonwernich.spring_ai.telegram_bot_test;
 
 import io.github.feddericovonwernich.spring_ai.telegram_bot.controllers.TelegramBotController;
-import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
+import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +19,7 @@ class BotEnabledWithKeyTest extends BasicApplicationIntegrationTest {
     private TelegramBotController telegramBotController;
 
     @Autowired
-    private AssistantThreadService assistantThreadService;
+    private AssistantThreadServiceImpl assistantThreadService;
 
     @Test
     void contextLoads() {

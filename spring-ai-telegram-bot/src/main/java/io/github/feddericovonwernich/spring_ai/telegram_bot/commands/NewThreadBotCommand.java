@@ -2,15 +2,15 @@ package io.github.feddericovonwernich.spring_ai.telegram_bot.commands;
 
 import io.github.feddericovonwernich.spring_ai.function_calling_service.spi.AssistantResponse;
 import io.github.feddericovonwernich.spring_ai.function_calling_service.spi.AssistantService;
-import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
+import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadServiceImpl;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class NewThreadBotCommand implements BotCommand {
 
     private final AssistantService assistantService;
-    private final AssistantThreadService assistantThreadService;
+    private final AssistantThreadServiceImpl assistantThreadService;
 
-    public NewThreadBotCommand(AssistantService assistantService, AssistantThreadService assistantThreadService) {
+    public NewThreadBotCommand(AssistantService assistantService, AssistantThreadServiceImpl assistantThreadService) {
         this.assistantService = assistantService;
         this.assistantThreadService = assistantThreadService;
     }

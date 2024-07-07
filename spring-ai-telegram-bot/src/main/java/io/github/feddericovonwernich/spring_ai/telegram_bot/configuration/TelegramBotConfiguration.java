@@ -5,7 +5,7 @@ import io.github.feddericovonwernich.spring_ai.telegram_bot.conditions.BotEnable
 import io.github.feddericovonwernich.spring_ai.telegram_bot.conditions.BotKeyPresentCondition;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.controllers.TelegramBotController;
 import io.github.feddericovonwernich.spring_ai.telegram_bot.repositories.AssistantThreadRepository;
-import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadService;
+import io.github.feddericovonwernich.spring_ai.telegram_bot.services.AssistantThreadServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class TelegramBotConfiguration {
     public TelegramBotController telegramBotController(ApplicationContext applicationContext,
                                                        TelegramClient telegramClient,
                                                        AssistantService assistantService,
-                                                       AssistantThreadService assistantThreadService) throws TelegramApiException {
+                                                       AssistantThreadServiceImpl assistantThreadService) throws TelegramApiException {
         TelegramBotController telegramBotController
                 = new TelegramBotController(applicationContext, telegramClient, assistantService, assistantThreadService);
 
@@ -58,8 +58,8 @@ public class TelegramBotConfiguration {
     }
 
     @Bean
-    public AssistantThreadService assistantThreadService(AssistantThreadRepository assistantThreadRepository) {
-        return new AssistantThreadService(assistantThreadRepository);
+    public AssistantThreadServiceImpl assistantThreadService(AssistantThreadRepository assistantThreadRepository) {
+        return new AssistantThreadServiceImpl(assistantThreadRepository);
     }
 
 }
