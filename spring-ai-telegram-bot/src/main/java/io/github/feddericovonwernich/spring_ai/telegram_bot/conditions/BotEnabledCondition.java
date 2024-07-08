@@ -30,7 +30,7 @@ public class BotEnabledCondition implements Condition {
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         Environment env = context.getEnvironment();
         boolean evaluation = Boolean.parseBoolean(env.getProperty("telegram.bot.enabled", "false"));
-        if (!evaluation) log.info("Assistant not enabled.");
+        if (!evaluation) log.info("Telegram bot not enabled.");
         return evaluation;
     }
 
